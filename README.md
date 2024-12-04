@@ -30,7 +30,7 @@ $ python3 -m venv /path/to/new/virtual/environment
 - Clone the repo using this command line:
 
 ``` sh
-  git clone git@gitlab.com:veolia.com/vesa/ada/ada-dataform-data-quality.git
+  git clone https://github.com/taher-software/Take-Home-Exercise
 
 ```
 
