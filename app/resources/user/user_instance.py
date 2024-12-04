@@ -13,7 +13,7 @@ class UserInstanceResource(BaseResource):
         self._user_service = UserService()
 
     @marshal_with(DataResponseSchema)
-    def post(self, tiktok_identifier):
+    def get(self, tiktok_identifier):
 
         user_data = asyncio.run(
             self._user_service.get_user_data(tiktok_identifier, raw=True)
