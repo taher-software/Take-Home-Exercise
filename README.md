@@ -1,52 +1,96 @@
 # Python Developer - Take Home Exercise
+- This exercise is about implementing the best possible solution to the problem: collecting data about tiktok users.
+
+<p align="center">
+  <img src="./assets/overview.gif">
+</p>
+
+## Built With
+
+- Python
+- FLask
+- TikTok-Api
+
+## Getting Started
+
+**To get a local copy up and running follow these simple example steps:**
+
+### Prerequisites
+
+- [Python](https://www.python.org/)
+
+### Setup
+
+- Make sure to create a virtual environment using this command line:
 
 ```
-LANGUAGES:                  Python
-MUST USE FRAMEWORKS:        Flask, TikTok-Api
-TESTS (UNIT, INTEGRATION):  nice to have, but not mandatory
+$ python3 -m venv /path/to/new/virtual/environment
 ```
 
-## Overview
+- Clone the repo using this command line:
 
-This exercise is about implementing the best possible solution to our problem: _**collecting data about tiktok users**_.
+``` sh
+  git clone git@gitlab.com:veolia.com/vesa/ada/ada-dataform-data-quality.git
 
-We're evaluating your ability to take a set of requirements and spike a holistic solution that is beautiful, intuitive and easy to debug/test/extend.
+```
 
-Ideally, your solution would have some way to run locally and test the results so we can fully analyze your efforts.
+### Install
 
----
+```sh
+  pip install -r requirements.txt
+```
 
-### Exercise: 
+### First Time
+```bash
+flask db init
+flask db migrate
+flask db upgrade
+```
 
-The goal of this exercise is to design a basic REST API that allows developers to collect data about tiktok users
+### Run
+
+```
+  python main.py
+```
+
+### Deployement
+``` command line
+  gcloud run deploy datadesk-management-services \
+    --image=gcr.io/gbl-ist-ve-datadeskvesa/cartographie:latest \
+    --set-env-vars="\
+    room-dataform=https://chat.googleapis.com/v1/spaces/${SPACE_ID}/messages?key=${KEY},\
+    room-bigquery=https://chat.googleapis.com/v1/spaces/${SPACE_ID}/messages?key=${KEY},\
+    location=${DATAFORM_REPO_LOCATION},\
+    repository=${DATAFORM_REPO_NAME},\
+    workspace=${DATAFORM_WORKPLACE_NAME},\
+    notif_dataform_dataset_id=${DATAFORM_DATASET_ID},\
+    notif_dataform_table_id=${DATAFORM_TABLE_ID},\
+    notif_dataset_id=${NOTIF_DATASET_ID},\
+    notif_table_id={NOTIF_BQ_TABLE_ID} \
+    --set-env-vars="recipient_emails=${REECEIVER_EMAIL_1}-${REECEIVER_EMAIL_2}-${REECEIVER_EMAIL_3}"
+```
+
+## Notes:
+
+- How much time it took?:  
+
+It took approximately three hours of work to complete. However, the entire exercise required more time due to issues with the TikTok-Api. I encountered a problem with the playwright package, which is a dependency for TikTok-Api, and resolving it took about 90 minutes. Additionally, I spent significant time reviewing the TikTok-Api documentation to find an API method that allows fetching user data using a user ID.
+
+- Issues/challenges you faced:  
+
+I encountered numerous issues with the playwright package, a dependency for TikTok-Api. I spent a considerable amount of time identifying that the problem was with the package itself and that only a specific version could resolve it. Additionally, I devoted significant time to reviewing the TikTok-Api documentation to find an API method that allows fetching user data using a user ID.
+
+- database design: 
+ 
+I used SQLite to design my database, creating a single table for storing user information.  
+
+- Possible ways to improve the api:  
+A potential improvement for the API would be to utilize the official TikTok APIs.
 
 
-#### User Story: As a developer I want to
+## 🤝 Contributing
 
-* Add tiktok user to the database via a`POST` request. The endpoint should accept a JSON payload that includes the tiktok username, pulls all user data from tiktok via [TikTok-Api](https://github.com/davidteather/TikTok-Api) and stores it in a database
-  * **Payload example**:
-  ```json
-    {"tiktok_username": "realmadrid"}
-  ```
+Contributions, issues, and feature requests are welcome!
 
-* Fetch a single tiktok user via `GET` request. The endpoint should accept either a tiktok username or a tiktok user id
-  * **Examples**: Let's assume 435787539865 is the tiktok id of [realmadrid](https://www.tiktok.com/@realmadrid). The developer has the option to fetch realmadrid data from your api using either one of these paths: `/tiktok_users/realmadrid` OR `/tiktok_users/435787539865`
+Feel free to check the [issues page](../../issues/).
 
-### A few quick notes
-
-* Other than the user id, there is no requirement on which fields should be stored in the database
-* You have total freedom on how you want to design your databases schemas. Please do whatever makes the most sense to you given the time allocated. Ideally this exercise would use MYSQL, SQLite or Postgres, but any SQL database is OK.
-* If you'd like to use an ORM to make this easier, thats fine with us!
-* [Flask](https://github.com/pallets/flask) and  [TikTok-Api](https://github.com/davidteather/TikTok-Api) are the only packages that are required for this exercise. Feel free to install other pip packages if necessary
-
----
-
-## Submitting your exercise
-
-- Once you are done, push your code to a github
-- Include a readme file in your repo that covers the following topics:
-  - How much time it took you to finish the exercise (number of hours)
-  - You database design
-  - Steps to run the flask app
-  - Issues/challenges you faced when you are solving this exercise
-  - Possible ways to improve the api
