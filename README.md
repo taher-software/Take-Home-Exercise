@@ -53,23 +53,6 @@ flask db upgrade
   python main.py
 ```
 
-### Deployement
-``` command line
-  gcloud run deploy datadesk-management-services \
-    --image=gcr.io/gbl-ist-ve-datadeskvesa/cartographie:latest \
-    --set-env-vars="\
-    room-dataform=https://chat.googleapis.com/v1/spaces/${SPACE_ID}/messages?key=${KEY},\
-    room-bigquery=https://chat.googleapis.com/v1/spaces/${SPACE_ID}/messages?key=${KEY},\
-    location=${DATAFORM_REPO_LOCATION},\
-    repository=${DATAFORM_REPO_NAME},\
-    workspace=${DATAFORM_WORKPLACE_NAME},\
-    notif_dataform_dataset_id=${DATAFORM_DATASET_ID},\
-    notif_dataform_table_id=${DATAFORM_TABLE_ID},\
-    notif_dataset_id=${NOTIF_DATASET_ID},\
-    notif_table_id={NOTIF_BQ_TABLE_ID} \
-    --set-env-vars="recipient_emails=${REECEIVER_EMAIL_1}-${REECEIVER_EMAIL_2}-${REECEIVER_EMAIL_3}"
-```
-
 ## Notes:
 
 - How much time it took?:  
